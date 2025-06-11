@@ -1,0 +1,46 @@
+// Following is the node structure
+/**************
+class ListNode{
+	public:
+	int data;
+	ListNode* next;
+};
+
+ListNode* newListNode(int data){
+	ListNode *temp = new ListNode;
+    	temp->data = data;
+    	temp->next = NULL;
+    	return temp;
+}
+***************/
+
+ListNode* PairSwap(ListNode* head){
+	/*Write your code here. 
+	*Don't write main().
+	*Don't take input, it is passed as function argument.
+	*Don't print output.
+	*Taking input and printing output is handled automatically.
+	*/ 
+	ListNode* curr = head;
+	int cnt = 1;
+	while(curr!=NULL){
+		int num = cnt;
+		ListNode *first = curr;
+		while(num>0){
+			curr = curr->next;
+			num--;
+		}
+		ListNode *last = curr;
+		if(cnt==1){
+			last->next = first;
+			first->next = curr->next;
+		}
+		else{
+			last->next = first->next;
+			first->next = curr->next; 	
+		}
+		curr = curr->next;
+		cnt++;
+	}
+	return head;
+}
