@@ -14,33 +14,24 @@ ListNode* newListNode(int data){
 }
 ***************/
 
+#include <vector>
 ListNode* PairSwap(ListNode* head){
-	/*Write your code here. 
-	*Don't write main().
-	*Don't take input, it is passed as function argument.
-	*Don't print output.
-	*Taking input and printing output is handled automatically.
-	*/ 
-	ListNode* curr = head;
-	int cnt = 1;
-	while(curr!=NULL){
-		int num = cnt;
-		ListNode *first = curr;
-		while(num>0){
-			curr = curr->next;
-			num--;
-		}
-		ListNode *last = curr;
-		if(cnt==1){
-			last->next = first;
-			first->next = curr->next;
-		}
-		else{
-			last->next = first->next;
-			first->next = curr->next; 	
-		}
-		curr = curr->next;
-		cnt++;
-	}
-	return head;
+    if (!head || !head->next) return head;
+
+    vector<ListNode*> nodes;
+    ListNode* temp = head;
+
+    while (temp) {
+        nodes.push_back(temp);
+        temp = temp->next;
+    }
+
+    int i = 0, gap = 1;
+    while (i + gap < nodes.size()) {
+        swap(nodes[i]->data, nodes[i + gap]->data);
+        i = i + gap + 1;
+        gap++;
+    }
+
+    return head;
 }
